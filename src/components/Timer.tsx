@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Button, Input } from "./Util.comp";
 
 export default function Timer() {
   interface Time {
@@ -89,43 +90,32 @@ export default function Timer() {
   return (
     <div className="flex flex-col px-20">
       <div className="flex flex-row">
-        <input
-          name="hours"
-          value={time.hours}
-          onChange={inputValidation}
-          className="bg-gray-100 w-1/3 mx-1 focus:border-blue-300 outline-none border border-gray-200 text-center text-gray-500 rounded-lg"
-        ></input>
+       
+        <Input name="hours" value={time.hours} onChange={inputValidation} />
         <p>:</p>
-        <input
-          name="minutes"
-          value={time.minutes}
-          onChange={inputValidation}
-          className="bg-gray-100 w-1/3 mx-1 outline-none focus:border-blue-300 border border-gray-200 text-center text-gray-500  rounded-lg"
-        ></input>
+        <Input name="minutes" value={time.minutes} onChange={inputValidation} />
+       
         <p>:</p>
-        <input
-          name="seconds"
-          value={time.seconds}
-          onChange={inputValidation}
-          className="bg-gray-100 w-1/3 mx-1 outline-none focus:border-blue-300 border border-gray-200 text-center text-gray-500  rounded-lg"
-        ></input>
+        <Input name="seconds" value={time.seconds} onChange={inputValidation} />
+       
       </div>
+
       {process ? (
-        <button
-          name="Stop"
-          onClick={stopTimer}
-          className="px-1 h-12 border border-red-600 outline-none rounded-full bg-red-700 text-gray-200 text-xl mt-10 shadow-xl"
-        >
-          STOP
-        </button>
+        <Button
+          name={"stop"}
+          trigger={stopTimer}
+          title={"STOP"}
+          BGcolor={"bg-red-700"}
+          HovBGcolor={"hover:bg-red-500"}
+        />
       ) : (
-        <button
-          name="Start"
-          onClick={startTimer}
-          className="px-1 h-12 border border-blue-300 outline-none rounded-full bg-green-500 text-gray-200 text-xl mt-10 shadow-xl"
-        >
-          START
-        </button>
+        <Button
+          name={"start"}
+          trigger={startTimer}
+          title={"START"}
+          BGcolor={"bg-green-700"}
+          HovBGcolor={"hover:bg-green-500"}
+        />
       )}
     </div>
   );
