@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-export default function TimeInput() {
+export default function Timer() {
   interface Time {
     hours: number;
     minutes: number;
@@ -13,6 +13,9 @@ export default function TimeInput() {
     minutes: 0,
     seconds: 0,
   });
+
+  // Used with UseEffect to control Starting and Stopping the timer.
+  const [process, setProcess] = useState<Boolean>(false);
 
   // Input Validation: Hours should be Max=24, min=0, Minutes & Seconds should be max=59, min=0
   const inputValidation = (e: React.SyntheticEvent) => {
@@ -40,50 +43,47 @@ export default function TimeInput() {
     }
   };
 
-  // Handles Time Input for Hours, Minutes and Seconds.
+  // Updates State --> Time Input for Hours, Minutes and Seconds.
   const handleInput = (e: React.SyntheticEvent) => {
     let target = e.target as HTMLInputElement;
     setTime({ ...time, [target.name]: target.value });
   };
 
-  const [process, setProcess] = useState(false);
-
   // Counter Function built with setTimeout( , 1000ms)
   const counter = (h: number, m: number, s: number) => {
-    if (s !== 0) {
+    setTimeout(() => {
       // Recursive function proceeds until seconds reache to 0.
-      setTimeout(() => {
-        // Decrease a second;
+      if (s !== 0) {
         setTime({ hours: h, minutes: m, seconds: s - 1 });
-        // Calls itself...
-        counter(h, m, s - 1);
-      }, 1000);
-
-      // If we have minutes, then we'll have to decrease minutes when seconds reach to zero.
-    } else if (s === 0 && m > 0) {
-      setTimeout(() => {
+        // If we have minutes, then we'll have to decrease minutes when seconds reach to zero.
+      } else if (s === 0 && m > 0) {
         // Seconds hit to 0, so it should display 59 a second later, and minute should be decreased.
-        setTime({ hours: h, minutes: m - 1, seconds: 59 });
-        counter(h, m - 1, 59);
-      }, 1000);
-
-      // The same mechanics proceeds, only for hours this time.
-    } else if (s === 0 && m === 0 && h > 0) {
-      setTimeout(() => {
+        setTime({
+          ...time,
+          minutes: m - 1,
+          seconds: 59,
+        });
+        // The same logic proceeds, only for hours this time.
+      } else if (s === 0 && m === 0 && h > 0) {
         setTime({ hours: h - 1, minutes: 59, seconds: 59 });
-        counter(h - 1, 59, 59);
-      }, 1000);
-    } else alert("finished");
+      } else {
+        setProcess(false);
+        console.log("Time is up!");
+      }
+    }, 1000);
   };
 
-  // Triggers counter function via Start Button.
-  const triggerTimer = (e: React.SyntheticEvent) => {
-    let target = e.target as HTMLInputElement;
+  useEffect(() => {
+    if (process) counter(time.hours, time.minutes, time.seconds);
+  });
 
-    if (target.name === "start") {
-      setProcess(true);
-      counter(time.hours, time.minutes, time.seconds);
-    } else setProcess(false);
+  // Starts counter function via Start Button.
+  const startTimer = () => {
+    setProcess(true);
+  };
+  // Stops the Counter.
+  const stopTimer = () => {
+    setProcess(false);
   };
 
   return (
@@ -110,31 +110,22 @@ export default function TimeInput() {
           className="bg-gray-100 w-1/3 mx-1 outline-none focus:border-blue-300 border border-gray-200 text-center text-gray-500  rounded-lg"
         ></input>
       </div>
-      {!process ? (
+      {process ? (
         <button
-          name="start"
-          onClick={triggerTimer}
-          className="px-8 h-12 border border-blue-300 outline-none rounded-full bg-green-500 text-gray-200 text-xl mt-10 shadow-xl"
+          name="Stop"
+          onClick={stopTimer}
+          className="px-1 h-12 border border-red-600 outline-none rounded-full bg-red-700 text-gray-200 text-xl mt-10 shadow-xl"
+        >
+          STOP
+        </button>
+      ) : (
+        <button
+          name="Start"
+          onClick={startTimer}
+          className="px-1 h-12 border border-blue-300 outline-none rounded-full bg-green-500 text-gray-200 text-xl mt-10 shadow-xl"
         >
           START
         </button>
-      ) : (
-        <div className="flex flex-row justify-center space-x-5">
-          <button
-            name="pause"
-            onClick={triggerTimer}
-            className="px-5 w-24 h-12 border border-yellow-300 outline-none rounded-full bg-yellow-500 text-gray-200 text-xl mt-10 shadow-xl"
-          >
-            Pause
-          </button>
-          <button
-            name="pause"
-            onClick={triggerTimer}
-            className="px-5 w-24 h-12 border border-red-300 outline-none rounded-full bg-red-500 text-gray-200 text-xl mt-10 shadow-xl"
-          >
-            Stop
-          </button>
-        </div>
       )}
     </div>
   );

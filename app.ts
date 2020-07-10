@@ -5,12 +5,12 @@ function createWindow () {
     let win = new BrowserWindow({
       width: 300,
       height: 300,
-      frame: false,
+      // frame: false,
       webPreferences: {
         nodeIntegration: true
       }
     })
-  
+    win.webContents.openDevTools() 
     // and load the index.html of the app.
     win.loadURL('http://localhost:3000')
   }

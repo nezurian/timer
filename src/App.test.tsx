@@ -8,9 +8,6 @@ test("renders learn react link", () => {
   expect(linkElement).toBeInTheDocument();
 });
 
-import {handleInput, time} from "./components/TimeInput"
-
-test("updates Time-State", () => {
 
 
-});
+
