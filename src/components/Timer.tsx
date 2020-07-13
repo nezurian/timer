@@ -35,7 +35,7 @@ export default function Timer() {
         } else handleInput(e);
       }
       // Minutes & Seconds can not be more than 59.
-      if (target.name === "minutes" || target.name === "seconds") {
+      else if (target.name === "minutes" || target.name === "seconds") {
         if (value > 59) {
           return;
           // If everything validates;
@@ -71,7 +71,7 @@ export default function Timer() {
         setProcess(false);
         console.log("Time is up!");
       }
-    }, 1000);
+    }, 10);
   };
 
   useEffect(() => {
@@ -88,35 +88,32 @@ export default function Timer() {
   };
 
   return (
-    <div className="flex flex-col px-20">
+    <div className="flex flex-col justify-center items-center">
+      <p className="text-xl text-gray-800 "> TIMER </p>
       <div className="flex flex-row">
-       
         <Input name="hours" value={time.hours} onChange={inputValidation} />
-        <p>:</p>
-        <Input name="minutes" value={time.minutes} onChange={inputValidation} />
-       
-        <p>:</p>
-        <Input name="seconds" value={time.seconds} onChange={inputValidation} />
-       
-      </div>
 
-      {process ? (
-        <Button
-          name={"stop"}
-          trigger={stopTimer}
-          title={"STOP"}
-          BGcolor={"bg-red-700"}
-          HovBGcolor={"hover:bg-red-500"}
-        />
-      ) : (
-        <Button
-          name={"start"}
-          trigger={startTimer}
-          title={"START"}
-          BGcolor={"bg-green-700"}
-          HovBGcolor={"hover:bg-green-500"}
-        />
-      )}
+        <Input name="minutes" value={time.minutes} onChange={inputValidation} />
+
+        <Input name="seconds" value={time.seconds} onChange={inputValidation} />
+      </div>
+      <div className="w-full flex justify-center">
+        {process ? (
+          <Button
+            name={"stop"}
+            trigger={stopTimer}
+            title={"STOP"}
+            color={"text-gray-600"}
+          />
+        ) : (
+          <Button
+            name={"start"}
+            trigger={startTimer}
+            title={"START"}
+            color={"text-gray-600"}
+          />
+        )}
+      </div>
     </div>
   );
 }

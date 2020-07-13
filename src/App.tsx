@@ -1,10 +1,10 @@
 import React from "react";
-import QuickStart from "./views/QuickStart"
+import Menu from "./views/Menu"
 
 function App() {
   return (
-    <div className="App h-screen w-screen container">
-    <QuickStart />
+    <div className="h-screen w-full">
+    <Menu />
     </div>
   );
 }
