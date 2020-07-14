@@ -4,8 +4,8 @@ An Open-Source, free-to-use Timer & Logger application for the people who loves 
 
 For starting Electron App you can run in the project directory 
 
-### 'npm run elec'. 
+npm run elec 
 
 and for the React Client,
 
-### 'cd client && npm start'
+'cd client && npm start'
