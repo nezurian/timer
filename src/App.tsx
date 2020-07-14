@@ -1,10 +1,12 @@
 import React from "react";
-import Menu from "./views/Menu"
+import Main from "./views/Main"
+import Topbar from "./views/Topbar"
 
 function App() {
   return (
-    <div className="h-screen w-full">
-    <Menu />
+    <div className="h-screen max-w-full flex flex-col">
+    <Topbar />
+    <Main />
     </div>
   );
 }

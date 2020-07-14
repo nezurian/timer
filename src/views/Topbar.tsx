@@ -1,6 +1,6 @@
 import React from "react";
-import Button from "./Button";
-import CategoryBar from "./CategoryBar";
+import Button from "../components/Menu/Button";
+import CategoryBar from "../components/Menu/CategoryBar";
 
 // Selector Bar, located at the Center Top of the App. 
 // Selected Categories will be used to Log new tasks for the Category and show Data for the selected Info on the Main Screen.
