@@ -85,34 +85,31 @@ export default function Timer() {
   };
 
   return (
-    <div className="flex flex-row w-full">
-      <div className="w-1/2"></div>
-      <div className="flex flex-col border w-1/2">
-        <p className="text-xl text-gray-800 text-center py-2 font-normal text-xl ">
-          {process ? "Running Timer..." : "Start Timing!"}
-        </p>
-        <div className="flex flex-row justify-around">
-          <TimeDisplay name={"Hours"} value={time.hours} />
-          <TimeDisplay name={"Minutes"} value={time.minutes} />
-          <TimeDisplay name={"Seconds"} value={time.seconds} />
-        </div>
-        <div className="w-full flex justify-center">
-          {process ? (
-            <Button
-              name={"stop"}
-              trigger={stopTimer}
-              title={"STOP"}
-              color={"text-gray-600"}
-            />
-          ) : (
-            <Button
-              name={"start"}
-              trigger={startTimer}
-              title={"START"}
-              color={"text-gray-600"}
-            />
-          )}
-        </div>
+    <div className="flex flex-col w-1/2">
+      <p className="text-xl text-gray-800 text-center antialiased py-2 font-normal text-xl ">
+        {process ? "Running Timer..." : "Start Timing!"}
+      </p>
+      <div className="flex flex-row justify-around">
+        <TimeDisplay name={"Hours"} value={time.hours} />
+        <TimeDisplay name={"Minutes"} value={time.minutes} />
+        <TimeDisplay name={"Seconds"} value={time.seconds} />
+      </div>
+      <div className="w-full flex justify-center">
+        {process ? (
+          <Button
+            name={"stop"}
+            trigger={stopTimer}
+            title={"STOP"}
+            color={"text-gray-600"}
+          />
+        ) : (
+          <Button
+            name={"start"}
+            trigger={startTimer}
+            title={"START"}
+            color={"text-gray-600"}
+          />
+        )}
       </div>
     </div>
   );

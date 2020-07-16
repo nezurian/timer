@@ -1,6 +1,7 @@
 import React from "react";
 import History from "./History";
-import Timer from "../Timer"
+import Timer from "../Timer";
+import Tagger from "./Tagger";
 
 export default function Operation() {
   // Type for the saved history events to the database. ** Duration can be calculated via Date() options.
@@ -30,13 +31,15 @@ export default function Operation() {
       tags: [
         { tag: "Change Time", color: "yellow" },
         { tag: "Date", color: "purple" },
-        { tag: "atat", color: "red" },
-        { tag: "agddg", color: "blue" },
       ],
       time: { date: "17.02.2020", duration: 500 },
       message: " I really have to master Date(). ",
     },
   ];
+
+  const allTags: {tag: string, color: string}[] = [];
+  categoryHistory.forEach((item) => allTags.push(...item.tags));
+
 
   return (
     <section className="flex flex-row h-full shadow-xl overflow-hidden ">
@@ -51,7 +54,10 @@ export default function Operation() {
 
       {/* Right side - Create New Task */}
       <section className="flex w-2/3">
-        <Timer />
+        <div className="flex flex-row w-full">
+          <Tagger tags={allTags} />
+          <Timer />
+        </div>
       </section>
     </section>
   );
