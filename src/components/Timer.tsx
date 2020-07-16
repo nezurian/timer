@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Input } from "./Util.comp";
+import { Button, TimeDisplay } from "./Util.comp";
 
 export default function Timer() {
   interface Time {
@@ -54,24 +54,21 @@ export default function Timer() {
   const counter = (h: number, m: number, s: number) => {
     setTimeout(() => {
       // Recursive function proceeds until seconds reache to 0.
-      if (s !== 0) {
-        setTime({ hours: h, minutes: m, seconds: s - 1 });
+      if (s < 59) {
+        setTime({ hours: h, minutes: m, seconds: s + 1 });
         // If we have minutes, then we'll have to decrease minutes when seconds reach to zero.
-      } else if (s === 0 && m > 0) {
+      } else if (s === 59 && m < 59) {
         // Seconds hit to 0, so it should display 59 a second later, and minute should be decreased.
         setTime({
           ...time,
-          minutes: m - 1,
-          seconds: 59,
+          minutes: m + 1,
+          seconds: 0,
         });
         // The same logic proceeds, only for hours this time.
-      } else if (s === 0 && m === 0 && h > 0) {
-        setTime({ hours: h - 1, minutes: 59, seconds: 59 });
-      } else {
-        setProcess(false);
-        console.log("Time is up!");
+      } else if (s === 59 && m === 59) {
+        setTime({ hours: h + 1, minutes: 0, seconds: 0 });
       }
-    }, 10);
+    }, 1000);
   };
 
   useEffect(() => {
@@ -88,31 +85,34 @@ export default function Timer() {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center">
-      <p className="text-xl text-gray-800 "> TIMER </p>
-      <div className="flex flex-row">
-        <Input name="hours" value={time.hours} onChange={inputValidation} />
-
-        <Input name="minutes" value={time.minutes} onChange={inputValidation} />
-
-        <Input name="seconds" value={time.seconds} onChange={inputValidation} />
-      </div>
-      <div className="w-full flex justify-center">
-        {process ? (
-          <Button
-            name={"stop"}
-            trigger={stopTimer}
-            title={"STOP"}
-            color={"text-gray-600"}
-          />
-        ) : (
-          <Button
-            name={"start"}
-            trigger={startTimer}
-            title={"START"}
-            color={"text-gray-600"}
-          />
-        )}
+    <div className="flex flex-row w-full">
+      <div className="w-1/2"></div>
+      <div className="flex flex-col border w-1/2">
+        <p className="text-xl text-gray-800 text-center py-2 font-normal text-xl ">
+          {process ? "Running Timer..." : "Start Timing!"}
+        </p>
+        <div className="flex flex-row justify-around">
+          <TimeDisplay name={"Hours"} value={time.hours} />
+          <TimeDisplay name={"Minutes"} value={time.minutes} />
+          <TimeDisplay name={"Seconds"} value={time.seconds} />
+        </div>
+        <div className="w-full flex justify-center">
+          {process ? (
+            <Button
+              name={"stop"}
+              trigger={stopTimer}
+              title={"STOP"}
+              color={"text-gray-600"}
+            />
+          ) : (
+            <Button
+              name={"start"}
+              trigger={startTimer}
+              title={"START"}
+              color={"text-gray-600"}
+            />
+          )}
+        </div>
       </div>
     </div>
   );

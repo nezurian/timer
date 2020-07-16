@@ -1,5 +1,6 @@
 import React from "react";
 import History from "./History";
+import Timer from "../Timer"
 
 export default function Operation() {
   // Type for the saved history events to the database. ** Duration can be calculated via Date() options.
@@ -40,7 +41,7 @@ export default function Operation() {
   return (
     <section className="flex flex-row h-full shadow-xl overflow-hidden ">
       {/* Left Side - Task history for the selected Category... */}
-      <section className="overflow-y-scroll px-2 flex flex-col w-2/5">
+      <section className="overflow-y-scroll px-2 flex flex-col w-1/3">
         <p className="text-lg text-bold text-gray-800">Category History</p>
         {/* History should take the complete list of Histoyry items.  */}
         {categoryHistory.map((hist) => (
@@ -49,7 +50,9 @@ export default function Operation() {
       </section>
 
       {/* Right side - Create New Task */}
-      <section className="flex w-3/5"></section>
+      <section className="flex w-2/3">
+        <Timer />
+      </section>
     </section>
   );
 }

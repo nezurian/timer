@@ -8,7 +8,7 @@ export default function Main() {
   return (
     // Main Frame
     <div className="flex flex-row px-2  h-full">
-      <div className="flex flex-col py-1 h-full w-2/3">
+      <div className="flex flex-col py-1 h-full w-3/4">
         <Operation />
         
         <div className="flex flex-row  py-4 shadow-xl h-full">
@@ -18,7 +18,7 @@ export default function Main() {
       
       </div>
       
-      <div className="flex py-1 w-1/3">
+      <div className="flex py-1 w-1/4">
         <History />
       </div>
     </div>
