@@ -13,17 +13,12 @@ type Props = {
 export default function CategoryHist(props: Props) {
   return (
     <section className="flex flex-col pt-2">
-      {/* Tags stay in a row */}
-      <div className="flex flex-row items-center space-x-1">
-        <Tag tags={props.HistoryItem.tags} />
-      </div>
-      {/* Time and Commit */}
       <Commit
         time={props.HistoryItem.time}
         message={props.HistoryItem.message}
       />
-
-      <hr />
+      <Tag tags={props.HistoryItem.tags} />
+      <hr className="mt-2" />
     </section>
   );
 }

@@ -10,6 +10,7 @@ export default function Operation() {
   };
 
   // A development mode DB example.
+  // The whole information here will be saved to DB when the timer stops.
   const categoryHistory: CategoryHistory[] = [
     {
       tags: [
@@ -25,7 +26,12 @@ export default function Operation() {
       message: "Not so important second commit message. What is going on? ",
     },
     {
-      tags: [{ tag: "Change Time", color: "yellow" }, { tag: "And also Date", color: "purple" }],
+      tags: [
+        { tag: "Change Time", color: "yellow" },
+        { tag: "Date", color: "purple" },
+        { tag: "atat", color: "red" },
+        { tag: "agddg", color: "blue" },
+      ],
       time: { date: "17.02.2020", duration: 500 },
       message: " I really have to master Date(). ",
     },
