@@ -1,12 +1,8 @@
 import React from "react";
-
-type CommitProps = {
-  time: { date: string; duration: number };
-  message: string;
-};
+import { CommitType } from "../../types";
 
 // Needs Time Modifications.
-export default function Commit(props: CommitProps) {
+export default function Commit(props: CommitType) {
   return (
     <div className="flex flex-col my-2">
       <div className="flex flex-row space-x-2">

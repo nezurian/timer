@@ -1,11 +1,12 @@
 import React from "react";
+import { Tag } from "../../types";
 
 type TagProps = {
-  tags: { tag: string; color: string }[];
+  tags: Tag[];
 };
 
 // Shows Tags
-export default function Tag(props: TagProps) {
+export default function TagRow(props: TagProps) {
   return (
     <div className="flex flex-row flex-wrap">
       {props.tags.map((tag) => {

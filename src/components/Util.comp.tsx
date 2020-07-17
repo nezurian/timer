@@ -1,4 +1,5 @@
 import React from "react";
+import { TDisplay } from "../types";
 
 interface Button {
   trigger: VoidFunction;
@@ -41,19 +42,19 @@ const Input = (props: Input) => {
   );
 };
 
-interface TDisplay {
-  name: string;
-  value: number;
-}
-
 const TimeDisplay = (props: TDisplay) => {
-
-  
-
   return (
     <div className="flex flex-col text-center">
-      <p className="text-gray-600 antialiased text-sm font-light">{props.name}</p>
-      <p className="text-gray-800 antialiased text-2xl font-light">{props.value === 0 ? "00" : props.value < 10 ? "0" + (props.value) : props.value}</p>
+      <p className="text-gray-600 antialiased text-sm font-light">
+        {props.name}
+      </p>
+      <p className="text-gray-800 antialiased text-2xl font-light">
+        {props.value === 0
+          ? "00"
+          : props.value < 10
+          ? "0" + props.value
+          : props.value}
+      </p>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import CategoryDDMenu from "./CategoryMenu";
+import CategoryMenu from "./CategoryMenu";
+import { Category } from "../../types";
 
 // Main Component for the Category Selection. It shows Category Title, and Category Color on hover.
 // Informs Main View on the selected category to display category information and task management.
@@ -12,12 +13,8 @@ export default function CategoryBar() {
   };
 
   // Categories are currently consisted of only names and colors. The state of category displays these information on the bar.
-  type Category = {
-    name: string;
-    color: string;
-  };
   const [category, setCategory] = useState<Category>({
-    name: "Select a Category",
+    title: "Select a Category",
     color: "gray",
   });
 
@@ -26,11 +23,11 @@ export default function CategoryBar() {
     const target = e.target as HTMLButtonElement;
 
     // Currently clicking on a menu item doesn't have an effect, since the states are updated via hovering:
-    setCategory({ name: target.id, color: target.name });
+    setCategory({ title: target.id, color: target.name });
   };
 
   // For Dev purposes. On the production the categories will be derived from a DB, along with statistical data they contain.
-  const categories: { title: string; color: string }[] = [
+  const categories: Category[] = [
     { title: "Study & Academics", color: "purple" },
     { title: "Research & Prototyping", color: "blue" },
     { title: "Sports & Excercise", color: "teal" },
@@ -44,15 +41,15 @@ export default function CategoryBar() {
   // Info: https://tailwindcss.com/docs/controlling-file-size/ ---> "Don't use string concatenation to create class names"
   const BGcolor = `bg-${category.color}-200`;
   const BorderColor = `border-${category.color}-400`;
-  
+
   return (
     <div
       onClick={handleDropdown}
       className={`rounded-lg relative ${BGcolor} ${BorderColor} cursor-pointer transition duration-300 ease-in no-outline w-64 border mx-64 antialiased text-center text-gray-800`}
     >
-      {category.name}
+      {category.title}
       {!menu ? null : (
-        <CategoryDDMenu handleHover={handleHover} categories={categories} />
+        <CategoryMenu handleHover={handleHover} categories={categories} />
       )}
     </div>
   );

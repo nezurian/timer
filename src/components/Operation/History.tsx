@@ -1,23 +1,22 @@
 import React from "react";
-import Tag from "./Tag";
+import TagRow from "./TagRow";
 import Commit from "./Commit";
+import { HistoryItem } from "../../types"
 
-type Props = {
-  HistoryItem: {
-    tags: { tag: string; color: string }[];
-    time: { date: string; duration: number };
-    message: string;
-  };
+// This should not be necessary but I couldn't work it out. 
+interface Props {
+  props: HistoryItem
 };
 
+// I should be able to put Category_History as proptype. But it creates TS problems.
 export default function CategoryHist(props: Props) {
   return (
     <section className="flex flex-col pt-2">
       <Commit
-        time={props.HistoryItem.time}
-        message={props.HistoryItem.message}
+        time={props.props.time}
+        message={props.props.message}
       />
-      <Tag tags={props.HistoryItem.tags} />
+      <TagRow tags={props.props.tags} />
       <hr className="mt-2" />
     </section>
   );

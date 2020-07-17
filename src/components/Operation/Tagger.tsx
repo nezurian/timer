@@ -1,10 +1,11 @@
 import React from "react";
+import { Tag } from "../../types";
 
-type TagProps = {
-  tags: { tag: string; color: string }[];
+interface Props {
+  tags: Tag[];
 };
 
-export default function Tagger(props: TagProps) {
+export default function Tagger(props: Props) {
   return (
     <div className="w-1/2 flex flex-col overflow-auto px-2">
       <p className="text-xl text-gray-800 py-2 font-normal antialiased text-xl ">
