@@ -1,3 +1,5 @@
+import {SyntheticEvent} from "react";
+
 export type Time = {
     hours: number;
     minutes: number;
@@ -55,7 +57,7 @@ export interface CommitType {
 
 // All buttons in the program should be able to utilised with this interface. One button component to rule them all!
 export interface TButton {
-    trigger?: VoidFunction; // To trigger component specific function.
+    trigger?: (e: SyntheticEvent) => void
     name?: string; // Button Name
     title?: string; // To Display on the Button
     color?: string; // This color will be used for Border, Background and Text, on the component.

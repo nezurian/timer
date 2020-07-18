@@ -1,5 +1,5 @@
 import React from "react";
-import { CommitType } from "../../types";
+import { CommitType } from "../../../types";
 
 // Needs Time Modifications.
 export default function Commit(props: CommitType) {

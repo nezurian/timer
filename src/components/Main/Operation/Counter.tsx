@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from "react";
-import {TimeDisplay} from "./Util.comp";
-import {Time, Timer} from "../types";
-import {Button} from "./Util.comp"
+import {Time, Timer} from "../../../types";
+import Controller from "./Counter.Controller"
+import Display from "./Counter.Display"
+
 
 export default function Counter() {
     // Default State.
@@ -67,70 +68,28 @@ export default function Counter() {
         setTimer({initial: false, running: false, paused: false, stopped: false, ended: true});
     }
 
-    const controller = () => {
-        if (timer.running) {
-            return (
-                <div className={"flex flex-row space-x-2"}>
-                    <Button
-                        name={"stop"}
-                        trigger={stopTimer}
-                        color={"teal"}
-                        iconSize={"3xl"}
-                        icon={"stop"}
-                    />
-                    <Button
-                        name={"pause"}
-                        trigger={pauseTimer}
-                        color={"teal"}
-                        iconSize={"3xl"}
-                        icon={"pause"}
-                    />
-                </div>
-            )
-        } else if (timer.stopped) {
-            return (
-                <div
-                    className={"w-full border border-red-500 rounded-lg border-l-4 border-r-4 bg-red-200 items-center justify-center"}>
-                    <p className={"text-gray-800 antialiased text-center my-1 font-light text-red-800 text-md"}>Are you
-                        sure you want to end the counter?</p>
-                    <div className={"flex flex-row space-x-1 my-2 justify-center"}>
-                        <Button name={"yes"} trigger={endTimer} color={"red"} icon={"check"} iconSize={"md"}/>
-                        <Button name={"no"} trigger={pauseTimer} color={"red"} icon={"block"} iconSize={"md"}/>
-                    </div>
-                </div>
-            )
-        } else {
-            return (
-                <Button
-                    name={"start"}
-                    trigger={startTimer}
-                    color={"teal"}
-                    iconSize={"3xl"}
-                    icon={"play_arrow"}
+    // To pass down to Counter.Controller
+    const controllerFunction = (e: React.SyntheticEvent) => {
+        const target = e.target as HTMLButtonElement
+        const name = target.name
 
-                />
-            )
-        }
+        if (name === "reset") resetTimer();
+        else if (name === "start") startTimer();
+        else if (name === "pause") pauseTimer();
+        else if (name === "stop") stopTimer();
+        else if (name === "end") endTimer();
     }
 
     return (
-        <div className="flex flex-col w-1/2">
+        <div className="flex flex-col w-7/12">
             <p className="text-xl text-gray-800 text-center antialiased font-normal text-3xl ">
                 {timer.running ? "Running Timer..." : timer.initial ? "Start Timing!" : timer.paused ? "Paused!" : timer.stopped ? "Stopped!" : null}
             </p>
-            <div className="flex flex-row items-end mt-2 justify-between">
-                <TimeDisplay name={"Hours"} value={time.hours}/>
-                <p className="mb-3 antialiased text-gray-700 font-light text-2xl">
-                    :
-                </p>
-                <TimeDisplay name={"Minutes"} value={time.minutes}/>
-                <p className="mb-3 antialiased text-gray-700 font-light text-2xl">
-                    :
-                </p>
-                <TimeDisplay name={"Seconds"} value={time.seconds}/>
-            </div>
+           <Display time={time} />
+
+
             <div className="w-full flex mt-4 justify-center">
-                {controller()}
+                <Controller timer={timer} controllerFunction={controllerFunction}/>
             </div>
         </div>
     );

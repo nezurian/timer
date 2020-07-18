@@ -1,6 +1,6 @@
 import React from "react";
-import {Tag} from "../../types";
-import {Button} from "../Util.comp"
+import {Tag} from "../../../types";
+import {Button} from "../../Util.comp"
 
 interface Props {
     tags: Tag[];

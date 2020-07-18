@@ -14,16 +14,10 @@ const Button = (props: TButton) => {
         <button
             name={props.name}
             onClick={props.trigger}
-            className={`border no-outline flex items-center outline-none rounded-full ${BorderColor} ${BGColor} ${TextColor} font-bold ${TextSize} shadow-xl`}
+            className={`border material-icons antialiased font-light ${IconSize} no-outline flex flex-row items-center outline-none rounded-full ${BorderColor} ${BGColor} ${TextColor} font-bold ${TextSize} shadow-xl`}
         >
-            {/* If an Icon is provided, than we'll have either only an Icon button, or a button with Icon and Text, next to each other.*/}
-            {props.icon ? (
-                <div className="flex flex-row px-2">
-                    <i className={`material-icons flex items-center ${IconSize}`}>{props.icon}</i>
-                    {/* If a Title is provided along with Icon they are placed next to each other. */}
-                    {props.title ? <p className={`antialiased   font-light pr-1 ${TextSize}`}> {props.title} </p> : null }
-                </div>
-            ) : props.title}
+            {props.icon}
+            {props.title}
         </button>
     );
 };

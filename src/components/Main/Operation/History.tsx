@@ -1,7 +1,7 @@
 import React from "react";
 import TagRow from "./TagRow";
 import Commit from "./Commit";
-import { HistoryItem } from "../../types"
+import { HistoryItem } from "../../../types"
 
 // This should not be necessary but I couldn't work it out. 
 interface Props {
