@@ -46,7 +46,7 @@ export default function Operation() {
       <section className="overflow-y-scroll px-2 flex flex-col w-1/3">
         <p className="text-lg text-bold text-gray-800">Category History</p>
        
-        {/* History should take the complete list of Histoyry items.  */}
+        {/* History should take the complete list of History items.  */}
         {categoryHistory.map((hist) => (
           <History props={hist} />
         ))}
@@ -54,8 +54,8 @@ export default function Operation() {
 
       {/* Right side - Create New Task */}
       <section className="flex w-2/3">
-        <div className="flex flex-row w-full">
-          <Tagger tags={allTags} />
+        <div className="flex flex-row  justify-center w-full">
+          {/*<Tagger tags={allTags} />*/}
           <Timer />
         </div>
       </section>
