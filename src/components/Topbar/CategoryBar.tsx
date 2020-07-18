@@ -30,7 +30,7 @@ export default function CategoryBar() {
   const categories: Category[] = [
     { title: "Study & Academics", color: "purple" },
     { title: "Research & Prototyping", color: "blue" },
-    { title: "Sports & Excercise", color: "teal" },
+    { title: "Sports & Exercise", color: "teal" },
     { title: "Leisure", color: "green" },
     { title: "Internet & Memes", color: "yellow" },
     { title: "Coding", color: "orange" },
@@ -39,13 +39,13 @@ export default function CategoryBar() {
 
   // For Tailwind CSS Purge functionality.
   // Info: https://tailwindcss.com/docs/controlling-file-size/ ---> "Don't use string concatenation to create class names"
-  const BGcolor = `bg-${category.color}-200`;
-  const BorderColor = `border-${category.color}-400`;
+    const BGcolor = `bg-${category.color}-200`;
+    const BorderColor = `border-${category.color}-400`;
 
   return (
     <div
       onClick={handleDropdown}
-      className={`rounded-lg relative ${BGcolor} ${BorderColor} cursor-pointer transition duration-300 ease-in no-outline w-64 border mx-64 antialiased text-center text-gray-800`}
+      className={`rounded-lg relative ${BGcolor} ${BorderColor} cursor-pointer transition duration-300 ease-in no-outline w-64 border w-1/4 antialiased text-center text-gray-800`}
     >
       {category.title}
       {!menu ? null : (

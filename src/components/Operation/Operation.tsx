@@ -1,11 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 import History from "./History";
-import Timer from "../Timer";
+import Counter from "../Counter";
 import Tagger from "./Tagger";
 import { HistoryItem } from "../../types";
 
 export default function Operation() {
-  // Type for the saved history events to the database. ** Duration can be calculated via Date() options.
 
   // A development mode DB example.
   // The whole information here will be saved to DB when the timer stops.
@@ -56,7 +55,7 @@ export default function Operation() {
       <section className="flex w-2/3">
         <div className="flex flex-row  justify-center w-full">
           {/*<Tagger tags={allTags} />*/}
-          <Timer />
+          <Counter />
         </div>
       </section>
     </section>

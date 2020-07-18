@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from "react";
 import {TimeDisplay} from "./Util.comp";
-import {Time} from "../types";
+import {Time, Timer} from "../types";
 import {Button} from "./Util.comp"
 
-export default function Timer() {
+export default function Counter() {
     // Default State.
     const [time, setTime] = useState<Time>({
         hours: 0,
@@ -12,7 +12,13 @@ export default function Timer() {
     });
 
     // Used with UseEffect to control Starting and Stopping the timer.
-    const [process, setProcess] = useState<Boolean>(false);
+    const [timer, setTimer] = useState<Timer>({
+        initial: true,
+        running: false,
+        paused: false,
+        stopped: false,
+        ended: false
+    })
 
     // Counter Function built with setTimeout( , 1000ms)
     const counter = (h: number, m: number, s: number) => {
@@ -36,26 +42,81 @@ export default function Timer() {
     };
 
     useEffect(() => {
-        if (process) counter(time.hours, time.minutes, time.seconds);
+        if (timer.running) counter(time.hours, time.minutes, time.seconds);
     });
 
-    // Starts counter function via Start Button.
+
+    // Resets the counter.
+    const resetTimer = () => {
+        setTimer({initial: true, running: false, paused: false, stopped: false, ended: false});
+    }
+    // Starts the Timer function.
     const startTimer = () => {
-        setProcess(true);
-    };
-    // Stops the Counter.
-    const stopTimer = () => {
-        setProcess(false);
+        setTimer({initial: false, running: true, paused: false, stopped: false, ended: false});
     };
     // Pauses the Counter.
     const pauseTimer = () => {
-        setProcess(false);
+        setTimer({initial: false, running: false, paused: true, stopped: false, ended: false});
     };
+    // Stops the Counter.
+    const stopTimer = () => {
+        setTimer({initial: false, running: false, paused: false, stopped: true, ended: false});
+    };
+    // Ends the countdown & resets timer.
+    const endTimer = () => {
+        setTimer({initial: false, running: false, paused: false, stopped: false, ended: true});
+    }
+
+    const controller = () => {
+        if (timer.running) {
+            return (
+                <div className={"flex flex-row space-x-2"}>
+                    <Button
+                        name={"stop"}
+                        trigger={stopTimer}
+                        color={"teal"}
+                        iconSize={"3xl"}
+                        icon={"stop"}
+                    />
+                    <Button
+                        name={"pause"}
+                        trigger={pauseTimer}
+                        color={"teal"}
+                        iconSize={"3xl"}
+                        icon={"pause"}
+                    />
+                </div>
+            )
+        } else if (timer.stopped) {
+            return (
+                <div
+                    className={"w-full border border-red-500 rounded-lg border-l-4 border-r-4 bg-red-200 items-center justify-center"}>
+                    <p className={"text-gray-800 antialiased text-center my-1 font-light text-red-800 text-md"}>Are you
+                        sure you want to end the counter?</p>
+                    <div className={"flex flex-row space-x-1 my-2 justify-center"}>
+                        <Button name={"yes"} trigger={endTimer} color={"red"} icon={"check"} iconSize={"md"}/>
+                        <Button name={"no"} trigger={pauseTimer} color={"red"} icon={"block"} iconSize={"md"}/>
+                    </div>
+                </div>
+            )
+        } else {
+            return (
+                <Button
+                    name={"start"}
+                    trigger={startTimer}
+                    color={"teal"}
+                    iconSize={"3xl"}
+                    icon={"play_arrow"}
+
+                />
+            )
+        }
+    }
 
     return (
         <div className="flex flex-col w-1/2">
             <p className="text-xl text-gray-800 text-center antialiased font-normal text-3xl ">
-                {process ? "Running Timer..." : "Start Timing!"}
+                {timer.running ? "Running Timer..." : timer.initial ? "Start Timing!" : timer.paused ? "Paused!" : timer.stopped ? "Stopped!" : null}
             </p>
             <div className="flex flex-row items-end mt-2 justify-between">
                 <TimeDisplay name={"Hours"} value={time.hours}/>
@@ -69,34 +130,7 @@ export default function Timer() {
                 <TimeDisplay name={"Seconds"} value={time.seconds}/>
             </div>
             <div className="w-full flex mt-4 justify-center">
-                {process ? (
-                    <div className={"flex flex-row space-x-2"}>
-                        <Button
-                            name={"stop"}
-                            trigger={stopTimer}
-                            color={"teal"}
-                            iconSize={"3xl"}
-                            icon={"stop"}
-                        />
-                        <Button
-                            name={"pause"}
-                            trigger={pauseTimer}
-                            color={"teal"}
-                            iconSize={"3xl"}
-                            icon={"pause"}
-                        />
-                    </div>
-                ) : (
-                    <Button
-                        name={"start"}
-                        trigger={startTimer}
-                        /*title={"Start"}*/
-                        color={"teal"}
-                        iconSize={"3xl"}
-                        icon={"play_arrow"}
-
-                    />
-                )}
+                {controller()}
             </div>
         </div>
     );
