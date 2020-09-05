@@ -14,6 +14,7 @@ export default function Controller(props: Controller) {
         return (
             <div className={"flex flex-row space-x-2"}>
                 <Button
+                    testID={"A"}
                     name={"stop"}
                     trigger={props.controllerFunction}
                     color={"teal"}
@@ -21,6 +22,7 @@ export default function Controller(props: Controller) {
                     icon={"stop"}
                 />
                 <Button
+                    testID={"B"}
                     name={"pause"}
                     trigger={props.controllerFunction}
                     color={"teal"}

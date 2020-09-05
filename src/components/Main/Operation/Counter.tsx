@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import {Time, Timer} from "../../../types";
 import Controller from "./Counter.Controller"
 import Display from "./Counter.Display"
+import EndTask from "./EndTask";
 
 
 export default function Counter() {

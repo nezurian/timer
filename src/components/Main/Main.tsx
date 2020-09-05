@@ -5,18 +5,17 @@ import History from "./History/History";
 import Counter from "./Operation/Counter";
 import CategoricHistory from "./Categoric History/CategoricHistory"
 
+// Here we'll have to deploy the information to the specific component.
 export default function Main() {
+
     return (
         // Main Frame
         <div className="flex flex-row px-2 h-full">
             <div className="flex flex-col py-1 h-full w-3/4">
                 {/* Top Bar */}
                 <section className="flex flex-row h-full shadow-xl overflow-hidden ">
-
                     <CategoricHistory/>
-
                     <Counter/>
-
                 </section>
 
                 {/*Bottom Bar*/}
@@ -31,5 +30,6 @@ export default function Main() {
                 <History/>
             </section>
         </div>
+
     );
 }

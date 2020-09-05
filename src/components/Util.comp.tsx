@@ -10,8 +10,10 @@ const Button = (props: TButton) => {
     const TextSize = `text-${props.textSize}`;
     const IconSize = `text-${props.iconSize}`;
 
+
     return (
         <button
+            data-cy={props.testID}
             name={props.name}
             onClick={props.trigger}
             className={`border material-icons antialiased font-light ${IconSize} no-outline flex flex-row items-center outline-none rounded-full ${BorderColor} ${BGColor} ${TextColor} font-bold ${TextSize} shadow-xl`}
